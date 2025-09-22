@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="utf-8"><title>Kayıt ol</title></head>
+<body>
+  <h1>Kayıt ol</h1>
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Hesap oluştur</button>
+  </form>
+  <p>Zaten hesabın var mı? <a href="{% url 'login' %}">Giriş yap</a></p>
+</body>
+</html>

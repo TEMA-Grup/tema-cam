@@ -17,8 +17,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from apps.core.views import select_company
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("core.urls")),
+    path("accounts/", include("accounts.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("", select_company, name="select_company"),
+    path("<slug:company>/", include(("core.urls", "core"), namespace="core")),
 ]

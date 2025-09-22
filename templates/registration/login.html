@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Giriş Yap</title>
+    <style>
+      :root { --pad: 16px; --radius: 12px; }
+      *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Roboto,sans-serif;background:#f6f7fb}
+      .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
+      .card{width:100%;max-width:420px;background:#fff;border:1px solid #eee;border-radius:var(--radius);padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+      h1{margin:.2rem 0 1rem;font-size:1.4rem}
+      .row{margin-bottom:12px}
+      label{display:block;margin:0 0 6px;color:#444;font-weight:600}
+      input[type=text],input[type=password]{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px}
+      .btn{width:100%;padding:12px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:600;cursor:pointer}
+      .links{display:flex;justify-content:space-between;margin-top:12px}
+      .error{background:#ffe9e9;border:1px solid #f5b8b8;color:#a40000;padding:10px;border-radius:8px;margin-bottom:12px}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <form method="post" class="card" action="">
+        {% csrf_token %}
+        <h1>Giriş Yap</h1>
+
+        {% if form.non_field_errors %}
+          <div class="error">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="row">
+          <label for="{{ form.username.id_for_label }}">Kullanıcı adı</label>
+          {{ form.username }}
+          {% if form.username.errors %}<div class="error">{{ form.username.errors }}</div>{% endif %}
+        </div>
+        <div class="row">
+          <label for="{{ form.password.id_for_label }}">Şifre</label>
+          {{ form.password }}
+          {% if form.password.errors %}<div class="error">{{ form.password.errors }}</div>{% endif %}
+        </div>
+
+        <!-- next parametresi (login_required -> ?next=/... geldiğinde korunur) -->
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+
+        <button class="btn" type="submit">Giriş</button>
+
+        <div class="links">
+          <a href="{% url 'password_reset' %}">Şifremi unuttum</a>
+          <a href="{% url 'signup' %}">Kayıt ol</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
