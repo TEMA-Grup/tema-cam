@@ -1,40 +1,10 @@
-{% load static %}
 <!doctype html>
-<html lang="tr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TemaTech • Landing</title>
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <!-- İstersen CDN ile basit bir CSS framework de ekleyebilirsin -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  </head>
-  <body>
-    <header class="hero">
-      <div class="container">
-        <h1>Merhaba 👋</h1>
-        <p>Bu bir Django landing page örneğidir.</p>
-        <a class="btn" href="{% url 'admin:index' %}">Yönetim Paneli</a>
-      </div>
-    </header>
-
-    <section class="features container">
-      <div class="card">
-        <h3>Hızlı</h3>
-        <p>Basit, temiz başlangıç.</p>
-      </div>
-      <div class="card">
-        <h3>Genişletilebilir</h3>
-        <p>App yapısına uygun.</p>
-      </div>
-      <div class="card">
-        <h3>Modern</h3>
-        <p>Kolayca Tailwind/Bootstrap eklenir.</p>
-      </div>
-    </section>
-
-    <footer class="container muted">
-      <small>&copy; {{ now|date:"Y" }} TemaTech</small>
-    </footer>
-  </body>
-</html>
+<html lang="tr"><head><meta charset="utf-8"><title>Landing</title></head>
+<body>
+  <h1>Hoş geldiniz</h1>
+  <p>Aktif şirket:
+  {% if request.tenant %}{{ request.tenant.name }}{% else %}—{% endif %}
+</p>
+  <p><a href="{% url 'tenants:switch' %}">Şirketi değiştir</a></p>
+  <p><a href="{% url 'logout' %}">Çıkış</a></p>
+</body></html>

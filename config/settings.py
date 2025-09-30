@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "core",
-    "companies",
-    "accounts",
+    "apps.core",
+    "apps.companies",
+    "apps.accounts",
+    "apps.parties",
+    "apps.tenants",
 ]
 
 MIDDLEWARE = [
@@ -55,17 +57,19 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "core.middleware.TenantMiddleware",
+    "apps.tenants.middleware.TenantMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-LOGIN_REDIRECT_URL = "select_company"
+LOGIN_REDIRECT_URL = "tenants:select"
 LOGOUT_REDIRECT_URL = "login"
 
 ROOT_URLCONF = "config.urls"
 
 AUTH_USER_MODEL = "accounts.User"
+
+TENANT_MODEL = "companies.Company"
 
 TEMPLATES = [
     {

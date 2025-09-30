@@ -5,7 +5,7 @@ class TenantRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         tenant = getattr(request, "tenant", None)
         if tenant is None:
-            return redirect("select_company")
+            return redirect("tenants:select")
         if request.user.is_authenticated and not request.user.companies.filter(pk=tenant.pk).exists():
             return HttpResponseForbidden("Bu şirkete erişiminiz yok.")
         return super().dispatch(request, *args, **kwargs)

@@ -1,8 +1,6 @@
-{% extends "base.html" %}
-{% block content %}
+<!doctype html><meta charset="utf-8">
 <h1>Şirket Seç</h1>
 <form method="post">{% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Devam</button>
 </form>
-{% endblock %}
